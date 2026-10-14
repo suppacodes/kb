@@ -12,14 +12,13 @@ def check_duplicates():
             return
         found= found[0]
     if path.suffix == ".csv":
-
         df= pd.read_csv(path)
-        print(df.isnull().sum())
+        print(df.duplicated().sum())
         print(df)
     else:
         print("Not a CSV file")
 
 
-
 check_duplicates()
+
 
