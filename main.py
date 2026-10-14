@@ -43,4 +43,31 @@ def remove_duplicates():
 
 check_duplicates()
 
+def visualize():
+    filename = input("File: ")
+    path = Path(filename)
+    if not path.exists():
+        found = list(Path.cwd().rglob(filename))
+        if not found:
+            print(f"{filename} Not found")
+            return
+        found = found[0]
+    if path.suffix == ".csv":
+        df = pd.read_csv(path)
+
+    # df: relationship between  years and unemployment of SA
+    SA= df[df["Country Name"]=="South Africa"]
+    years=range(1991,2022)
+    unemployment = SA[[str(year) for year in years]].iloc[0] #iloc creates a SA series
+    # use a loop instead of typing the years manually.
+    
+    # CREATE SCATTERPLOT
+    plt.scatter(years,unemployment)
+    plt.xlabel("Year")
+    plt.ylabel("Country Name")
+    plt.title("SA Unemployment")
+    plt.show()
+
+visualize()
+
 
